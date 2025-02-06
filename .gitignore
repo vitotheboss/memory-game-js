@@ -1,0 +1,21 @@
+# Archivos de sistema de macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Archivos de metadatos del Finder
+Icon?
+._*
+
+# Archivos de Spotlight
+.metadata_never_index
+.VolumeIcon.icns
+
+# Archivos de almacenamiento en caché de macOS
+.DS_Store?
+.Trashes
+.fseventsd
+.CFUserTextEncoding
+
+# Archivos de configuración de macOS
+*.swp
