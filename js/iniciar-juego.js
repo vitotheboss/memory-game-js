@@ -13,6 +13,8 @@ async function cargarJuego() {
         document.querySelector('button#juego-relax').addEventListener('click',()=> iniciarRelax());
         document.querySelector('#control-nivel').addEventListener('click',menuNivelVisible);
         document.querySelector('#cierra-niveles').addEventListener('click',menuNivelOculto);
+        document.querySelector('body').addEventListener('click',menuNivelFueraClick);
+        document.addEventListener('keydown',menuNivelEscape)
         agregarClaseCss('#bienvenida','visible');
 
         grupoCartas = datoCartas.cartas;

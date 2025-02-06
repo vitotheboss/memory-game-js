@@ -48,6 +48,18 @@ function menuNivelOculto() {
     quitarClaseCss('.selecciona-nivel','visible');
 }
 
+function menuNivelFueraClick(e) {
+    if (e.target.closest('.selecciona-nivel')) {
+        return;
+    }
+    quitarClaseCss('.selecciona-nivel','visible');
+}
+
+function menuNivelEscape(e) {
+    // console.log(e.key);
+    if (e.key === 'Escape') menuNivelOculto();
+}
+
 // - - - Ejecuta Nivel - - - //
 
 function subeNivel() {
