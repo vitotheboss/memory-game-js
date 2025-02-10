@@ -1,4 +1,5 @@
 // - - - Carga Niveles Juego - - - //
+
 function cargaNivel() {
     if (grupoCartas.length === 0) {
         console.warn('⚠️ No se han cargado las cartas, no se generaron los niveles: ', nivel)
