@@ -21,17 +21,11 @@ async function cargarJuego() {
         sonidoInterruptor();
         grupoCartas = datoCartas.cartas;
         cargaNivel();
-
     }
-    
-
-    // Inicializar el juego
-    // iniciar();
-    //
 }
 
 function iniciar() {
-    movimientos=0;
+    movimientos = 0;
     document.querySelector('#mov-total').innerText = movimientoMax() < 10 ? `0${movimientoMax()}` : `${movimientoMax()}`;
     reparteCartas(todasCartas(nivelActual));
     document.querySelector('#mov').innerText = `0${movimientos}`;
@@ -70,31 +64,26 @@ function iniciarNormal() {
 }
 
 function reiniciar() {
-    // nivelActual = 0;
     refrescaNivel();
     iniciar();
 }
 
 function finalizar() {
-    // 
-    console.log('Finalizar');
-    //
+    // console.log('Finalizar');
     cronometro.parar();
     if (nivelActual < grupoCartas.length - 1) { agregarClaseCss('#subeNivel','visible'); return;};
     if (nivelActual >= grupoCartas.length - 1) { agregarClaseCss('#endGame','visible'); return;};
-
-    //
 }
 
 function gameOver() {
-    console.log('game over');
+    // console.log('game over');
     agregarClaseCss('#gameOver','visible');
     cronometro.parar();
 }
 
 
 function timeOver() {
-    console.log('time Over');
+    // console.log('time Over');
     agregarClaseCss('#timeOver', 'visible');
     cronometro.parar();
 }
@@ -102,11 +91,28 @@ function timeOver() {
 function juegoSalir() {
     cronometro.parar();
     menuNivelOculto();
-    setTimeout(()=>{agregarClaseCss('#bienvenida','visible')},800);
+    setTimeout(() => {agregarClaseCss('#bienvenida','visible')},800);
 }
 
+// - - SONIDOS - - //
 
+function sonidoInterruptor() {
+    // console.log('interruptor cargado');
+    document.querySelector('#sonido-interruptor').addEventListener('click',(e)=> {
+        
+        sonidoActivado = !sonidoActivado;
+        e.target.innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
+        // console.log('boton sonido', e.target, sonidoActivado);
+    });
+}
 
+function sonidoPlay(tipoSonido) {
+    // console.log('sonido: ',tipoSonido);
+    if (!sonidoActivado) return;
+    document.querySelector(tipoSonido).cloneNode().play();
+}
+
+// - - CSS CLASS - - //
 
 function agregarClaseCss(selector,clase){
     document.querySelector(selector).classList.add(clase);
@@ -119,20 +125,4 @@ function quitarClaseCss(selector,clase){
 
 function intercambiaClaseCss(selector,clase){
     document.querySelector(selector).classList.toggle(clase);
-}
-
-function sonidoInterruptor() {
-    console.log('interruptor cargado');
-    document.querySelector('#sonido-interruptor').addEventListener('click',(e)=> {
-        
-        sonidoActivado = !sonidoActivado;
-        e.target.innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
-        console.log('boton sonido', e.target, sonidoActivado);
-    });
-}
-
-function sonidoPlay(tipoSonido) {
-    // console.log('sonido: ',tipoSonido);
-    if (!sonidoActivado) return;
-    document.querySelector(tipoSonido).cloneNode().play();
 }
