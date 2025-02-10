@@ -4,6 +4,7 @@ let grupoCartas = [];
 let nivel = [];
 let nivelActual = 0;
 let modoRelax = false;
+let sonidoActivado = false;
 
 async function leerJson(url) {
     try {

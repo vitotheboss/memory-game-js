@@ -5,7 +5,7 @@ function voltearCarta(carta) {
     carta.classList.add('descubierta');
     totalVolteadas = document.querySelectorAll('.descubierta:not(.acertada)'); // segunda asignación de nodo con el valor actual.
 
-    sonido('#sonido-carta');
+    sonidoPlay('#sonido-carta');
 
     // console.log(totalVolteadas, `Longitud de nodos:${totalVolteadas.length}`, `Orden de carta:${orden}`);
     

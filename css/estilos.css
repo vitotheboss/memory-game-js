@@ -54,7 +54,7 @@ body {
   display: flex;
 }
 
-.cabecera-titulo {
+.titulo-4 {
   font-family: var(--font-display);
   font-weight: 600;
   font-size: 0.8rem;
@@ -62,6 +62,10 @@ body {
   line-height: 1;
   margin: 0;
   color: rgba(0, 0, 0, 0.4);
+}
+
+.titulo-4.neg {
+  color: rgba(255,255,255,0.6);
 }
 
 .cabecera-num {
@@ -290,7 +294,7 @@ button:focus {
   /* height: 1.1rem; */
   height: var(--menu-width);
   line-height: .68rem;
-  display: none;
+  /* display: none; */
   justify-content: center;
   background: var(--hotpink);
   flex-direction: column;
@@ -315,7 +319,7 @@ button:focus {
 
 
 
-.selecciona-nivel{
+.menu-general{
   background-color: var(--hotpink);
   position: fixed;
   width: 250px;
@@ -324,26 +328,33 @@ button:focus {
   bottom: 0;
   transform: translateX(250px);
   transition: transform .3s;
-  padding: 1rem 2rem;
+  padding: 3.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.selecciona-nivel.visible{
+.menu-general.visible{
   transform: translateX(0);
 }
 
-.selecciona-nivel button{
+.menu-general button{
   background: transparent;
   padding: 0;
 }
 
-.selecciona-nivel ul{
+.menu-general ul{
   list-style: none;
   padding-left: 0;
 }
 
-.selecciona-nivel li{
+.menu-general li{
   margin-bottom: 1rem;
   text-align: center;
+}
+
+.menu-general .menu-niveles {
+  margin-top: 1rem;
 }
 
 .cierra-niveles{
@@ -358,4 +369,8 @@ button:focus {
 .oculto {
   visibility: hidden;
   display: none;
+}
+
+.mt-md {
+  margin-top: 2rem;
 }

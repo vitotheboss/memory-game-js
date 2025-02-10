@@ -17,7 +17,7 @@ function cargaNivel() {
 // - - - Menu Niveles - - - //
 
 function menuNivel() {
-    const rootMenu = document.querySelector('.selecciona-nivel ul');
+    const rootMenu = document.querySelector('.menu-general ul.menu-niveles');
     rootMenu.innerHTML = '';
     nivel.forEach((_,i)=> {
         let nivel = document.createElement('li');
@@ -41,18 +41,18 @@ function cambiaNivel() {
 
 function menuNivelVisible(e) {
     e.stopPropagation();
-    intercambiaClaseCss('.selecciona-nivel','visible');
+    intercambiaClaseCss('.menu-general','visible');
 }
 
 function menuNivelOculto() {
-    quitarClaseCss('.selecciona-nivel','visible');
+    quitarClaseCss('.menu-general','visible');
 }
 
 function menuNivelFueraClick(e) {
-    if (e.target.closest('.selecciona-nivel')) {
+    if (e.target.closest('.menu-general')) {
         return;
     }
-    quitarClaseCss('.selecciona-nivel','visible');
+    quitarClaseCss('.menu-general','visible');
 }
 
 function menuNivelEscape(e) {

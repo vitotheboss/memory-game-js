@@ -14,9 +14,11 @@ async function cargarJuego() {
         document.querySelector('#control-nivel').addEventListener('click',menuNivelVisible);
         document.querySelector('#cierra-niveles').addEventListener('click',menuNivelOculto);
         document.querySelector('body').addEventListener('click',menuNivelFueraClick);
-        document.addEventListener('keydown',menuNivelEscape)
+        document.addEventListener('keydown',menuNivelEscape);
         agregarClaseCss('#bienvenida','visible');
-
+        document.querySelector('#salir-juego').addEventListener('click',juegoSalir);
+        document.querySelector('#sonido-interruptor').innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
+        sonidoInterruptor();
         grupoCartas = datoCartas.cartas;
         cargaNivel();
 
@@ -38,15 +40,15 @@ function iniciar() {
     quitarClaseCss('#subeNivel','visible');
     quitarClaseCss('#timeOver', 'visible');
     quitarClaseCss('#bienvenida', 'visible');
-    quitarClaseCss('#control-nivel', 'visible');
     if (!modoRelax) {
-    let minutos = Math.floor(nivel[nivelActual].tiempo / 60);
-    let segundos =  nivel[nivelActual].tiempo % 60;
-    cronometro.iniciarResta(minutos, segundos);
-    return;
+        agregarClaseCss('#menu-niveles', 'oculto');
+        let minutos = Math.floor(nivel[nivelActual].tiempo / 60);
+        let segundos =  nivel[nivelActual].tiempo % 60;
+        cronometro.iniciarResta(minutos, segundos);
+        return;
     }
     if (modoRelax) {
-        agregarClaseCss('#control-nivel','visible');
+        quitarClaseCss('#menu-niveles', 'oculto');
         menuNivel();
         cronometro.parar();
         cronometro.iniciarSuma(minutos,segundos,modoRelax);
@@ -97,6 +99,12 @@ function timeOver() {
     cronometro.parar();
 }
 
+function juegoSalir() {
+    cronometro.parar();
+    menuNivelOculto();
+    setTimeout(()=>{agregarClaseCss('#bienvenida','visible')},800);
+}
+
 
 
 
@@ -113,7 +121,18 @@ function intercambiaClaseCss(selector,clase){
     document.querySelector(selector).classList.toggle(clase);
 }
 
-function sonido(tipoSonido) {
+function sonidoInterruptor() {
+    console.log('interruptor cargado');
+    document.querySelector('#sonido-interruptor').addEventListener('click',(e)=> {
+        
+        sonidoActivado = !sonidoActivado;
+        e.target.innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
+        console.log('boton sonido', e.target, sonidoActivado);
+    });
+}
+
+function sonidoPlay(tipoSonido) {
     // console.log('sonido: ',tipoSonido);
+    if (!sonidoActivado) return;
     document.querySelector(tipoSonido).cloneNode().play();
 }

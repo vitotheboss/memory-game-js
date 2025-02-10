@@ -15,13 +15,13 @@ function compararCarta(cartas) {
 function cartaCoincide(cartas) {
     // console.log('Coinciden');
     cartas.forEach((elemento) => elemento.classList.add('acertada'));
-    sonido('#sonido-acierto');
+    sonidoPlay('#sonido-acierto');
 }
 
 function cartaNoCoincide(cartas) {
     // console.log('NO Coinciden');
     cartas.forEach((elemento) => elemento.classList.add('error'));
-    sonido('#sonido-error');
+    sonidoPlay('#sonido-error');
 
     setTimeout(()=>{
         cartas.forEach((elemento) => {

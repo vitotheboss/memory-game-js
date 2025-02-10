@@ -13,22 +13,24 @@
 <body>
   <div id="bienvenida" class="bienvenida">
     <h1>👋 ¡Hola! 👋</h1>
+    <h3>Modo de Juego</h3>
     <div class="bienvenida-botones">
-      <button id="juego-normal">¡Quiero jugar!</button>
-      <button id="juego-relax">Modo relax</button>
+
+      <button id="juego-normal">🕦 Competir 🎱</button>
+      <button id="juego-relax">🍩 Relax 🍭</button>
     </div>
   </div>
   <header class="cabecera">
     <div class="col col-1">
       <div class="contadores">
         <div class="contador-item">
-          <h4 class="cabecera-titulo">Movimientos</h4>
+          <h4 class="titulo-4">Movimientos</h4>
           <div class="cabecera-num">
             <span id="mov">00</span><span id="mov-separa">/</span><span id="mov-total">20</span>
           </div>
         </div>
         <div id="cronometro" class="contador-item">
-          <h4 class="cabecera-titulo">Tiempo</h4>
+          <h4 class="titulo-4">Tiempo</h4>
           <div class="cabecera-num">
             <span id="minutos">00</span>:<span id="segundos">00</span>
           </div>
@@ -37,11 +39,11 @@
     </div>
     <div class="col col-2">
       <div class="nivel nivel-indicator ">
-        <h4 class="cabecera-titulo">Nivel</h4>
+        <h4 class="titulo-4">Nivel</h4>
         <div class="cabecera-num"><span id="nivel">01</span></div>
 
       </div>
-      <button id="control-nivel" class="control-nivel visible">
+      <button id="control-nivel" class="control-nivel">
         <span>⎯</span>
         <span>⎯</span>
         <span>⎯</span>
@@ -79,9 +81,22 @@
       </div>
     </div>
   </main>
-  <div class="selecciona-nivel">
+  <div class="menu-general">
     <button id="cierra-niveles" class="cierra-niveles">&times;</button>
-    <ul></ul>
+    <div class="menu-content">
+      <div id="menu-sonido">
+        <h4 class="titulo-4 neg">Sonido</h4>
+        <button id="sonido-interruptor"></button>
+      </div>
+      <div id="menu-niveles">
+        <h4 class="titulo-4 neg mt-md">Niveles de Juego</h4>
+        <ul class="menu-niveles"></ul>
+      </div>
+    </div>
+    <div>
+      <button id="salir-juego">💣 Salir</button>
+    </div>  
+    
   </div>
 
   <audio src="sonidos/acierto.mp3" class="sonido" id="sonido-acierto" preload="auto" controls></audio>
