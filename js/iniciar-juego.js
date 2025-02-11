@@ -10,6 +10,7 @@ function iniciar() {
     quitarClaseCss('#subeNivel','visible');
     quitarClaseCss('#timeOver', 'visible');
     quitarClaseCss('#bienvenida', 'visible');
+    quitarClaseCss('#finalScore', 'visible');
     if (!modoRelax) {
         agregarClaseCss('#menu-niveles', 'oculto');
         let minutos = Math.floor(nivel[nivelActual].tiempo / 60);
@@ -68,7 +69,7 @@ function finalizar() {
         puntos.abrir();
         puntos.acumulaSuma();
         puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
-        puntos.escribe('#endGame .puntuacion.final',puntos.acumulado);
+        puntos.escribe('#finalScore .puntuacion.final',puntos.acumulado);
         return;
     };
 }
@@ -79,11 +80,15 @@ function gameOver() {
     cronometro.parar();
 }
 
-
 function timeOver() {
     // console.log('time Over');
     agregarClaseCss('#timeOver', 'visible');
     cronometro.parar();
+}
+
+function goPremio() {
+    quitarClaseCss('#endGame','visible');
+    agregarClaseCss('#finalScore','visible');
 }
 
 function juegoSalir() {

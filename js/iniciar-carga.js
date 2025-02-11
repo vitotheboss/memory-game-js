@@ -18,6 +18,7 @@ async function cargarJuego() {
         document.querySelector('body').addEventListener('click',menuNivelFueraClick);
         document.addEventListener('keydown',menuNivelEscape);
         agregarClaseCss('#bienvenida','visible');
+        document.querySelector('#goPremio').addEventListener('click',goPremio);
         document.querySelector('#salir-juego').addEventListener('click',juegoSalir);
         document.querySelector('#sonido-interruptor').innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
         sonidoInterruptor();

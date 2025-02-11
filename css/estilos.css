@@ -192,7 +192,8 @@ main {
 
 .sube-nivel,
 .game-over,
-.end-game {
+.end-game,
+.final-score {
   display: none;
   position: absolute;
   top: 0;
@@ -204,7 +205,9 @@ main {
 
 .sube-nivel.visible,
 .game-over.visible,
-.end-game.visible{
+.end-game.visible,
+.final-score.visible 
+{
   display: flex;
 }
 
@@ -298,12 +301,14 @@ button {
   text-transform: uppercase;
   font-size: 1.5rem;
   line-height: 1;
-  transition: 0.3s;
+  transition: 0.3s ease;
+
+  opacity: 0.8;
 }
 
 button:hover,
 button:focus {
-  opacity: 0.9;
+  opacity: 1;
   outline: 0;
 }
 
