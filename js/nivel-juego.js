@@ -70,6 +70,7 @@ function subeNivel() {
 function refrescaNivel() {
  let txtNivel = nivelActual < 10 ? `0${nivelActual + 1}` : `${nivelActual + 1}`;
  document.querySelector('#nivel').innerText = txtNivel;
+ puntos.nivel = 0;
 }
 
 function nuevoNivel() {

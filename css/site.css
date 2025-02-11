@@ -4,6 +4,8 @@
   --font-display: "Archivo Narrow", sans-serif;
   --hotpink: #e94057;
   --orange: #f27121;
+  --lightgrey: #f6f6fe;
+  --neutralgrey: #bcbcc0;
   --gradient: linear-gradient(35deg, var(--orange), var(--hotpink));
   --menu-width: 36px;
 }

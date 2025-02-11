@@ -1,28 +1,4 @@
-cargarJuego();
-
-
-async function cargarJuego() {
-    const datoCartas = await leerJson('dato/cartas.json');
-
-    if (datoCartas) {
-        document.querySelector('#subir').addEventListener('click',()=> nuevoNivel());
-        document.querySelectorAll('.reiniciar').forEach(
-            (e)=> e.addEventListener('click',()=> reiniciar())
-        );
-        document.querySelector('button#juego-normal').addEventListener('click',()=> iniciarNormal());
-        document.querySelector('button#juego-relax').addEventListener('click',()=> iniciarRelax());
-        document.querySelector('#control-nivel').addEventListener('click',menuNivelVisible);
-        document.querySelector('#cierra-niveles').addEventListener('click',menuNivelOculto);
-        document.querySelector('body').addEventListener('click',menuNivelFueraClick);
-        document.addEventListener('keydown',menuNivelEscape);
-        agregarClaseCss('#bienvenida','visible');
-        document.querySelector('#salir-juego').addEventListener('click',juegoSalir);
-        document.querySelector('#sonido-interruptor').innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
-        sonidoInterruptor();
-        grupoCartas = datoCartas.cartas;
-        cargaNivel();
-    }
-}
+// - - - Inicios y Tipos de Juego - - - //
 
 function iniciar() {
     movimientos = 0;
@@ -64,6 +40,9 @@ function iniciarNormal() {
 }
 
 function reiniciar() {
+    puntos.abrir();
+    puntos.acumulaResta();
+    puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
     refrescaNivel();
     iniciar();
 }
@@ -71,8 +50,27 @@ function reiniciar() {
 function finalizar() {
     // console.log('Finalizar');
     cronometro.parar();
-    if (nivelActual < grupoCartas.length - 1) { agregarClaseCss('#subeNivel','visible'); return;};
-    if (nivelActual >= grupoCartas.length - 1) { agregarClaseCss('#endGame','visible'); return;};
+
+    if (nivelActual < grupoCartas.length - 1) {
+        agregarClaseCss('#subeNivel','visible');
+        puntos.puntuar();
+        puntos.escribe('#subeNivel .puntuacion',puntos.nivel);
+        puntos.abrir();
+        puntos.acumulaSuma();
+        puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
+        return;
+    };
+
+    if (nivelActual >= grupoCartas.length - 1) {
+        agregarClaseCss('#endGame','visible');
+        puntos.puntuar();
+        puntos.escribe('#endGame .puntuacion.nivel',puntos.nivel);
+        puntos.abrir();
+        puntos.acumulaSuma();
+        puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
+        puntos.escribe('#endGame .puntuacion.final',puntos.acumulado);
+        return;
+    };
 }
 
 function gameOver() {
@@ -91,7 +89,12 @@ function timeOver() {
 function juegoSalir() {
     cronometro.parar();
     menuNivelOculto();
-    setTimeout(() => {agregarClaseCss('#bienvenida','visible')},800);
+    setTimeout(() => {
+        agregarClaseCss('#bienvenida','visible');
+        puntos.borrarnivel('#subeNivel .puntuacion');
+        puntos.borrarnivel('#endGame .puntuacion');
+        puntos.borraracumulado('#menu-puntuacion .puntuacion');
+    },800);
 }
 
 // - - SONIDOS - - //
@@ -110,19 +113,4 @@ function sonidoPlay(tipoSonido) {
     // console.log('sonido: ',tipoSonido);
     if (!sonidoActivado) return;
     document.querySelector(tipoSonido).cloneNode().play();
-}
-
-// - - CSS CLASS - - //
-
-function agregarClaseCss(selector,clase){
-    document.querySelector(selector).classList.add(clase);
-
-}
-
-function quitarClaseCss(selector,clase){
-    document.querySelector(selector).classList.remove(clase);
-}
-
-function intercambiaClaseCss(selector,clase){
-    document.querySelector(selector).classList.toggle(clase);
 }

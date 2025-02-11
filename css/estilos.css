@@ -232,8 +232,59 @@ main {
 }
 
 .modal button {
-  margin: 3rem 0;
+  margin: 0 0 2rem 0;
 }
+
+.modal hr {
+  width: 100%;
+  min-width: 100%;
+  max-width: 100%;
+  color: var(--lightgrey);
+  border-color: var(--lightgrey);
+  margin: 2rem 0;
+}
+
+.modal .botones {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 1rem;
+}
+
+.modal .emoji-accent {
+  font-size: 3.8em;
+}
+
+.puntuacion {
+  font-weight: 700;
+  font-size: 0.7em;
+  letter-spacing: 0.06em;
+  display: flex;
+  flex-direction: column;
+}
+
+.puntuacion span{
+  font-size: 2.5em;
+  letter-spacing: -0.05em;
+}
+
+.modal .puntuacion {
+  color: var(--hotpink);
+  line-height: 0.9;
+}
+
+.menu-content .puntuacion {
+  flex-direction: row;
+  align-items: baseline;
+  color: rgba(255,255,255,0.8);
+}
+
+.menu-content .puntuacion i {
+  font-weight: 400;
+  margin-left: 6px;
+  opacity: 0.8;
+}
+
 
 button {
   cursor: pointer;
@@ -256,14 +307,14 @@ button:focus {
   outline: 0;
 }
 
-.modal .reiniciar {
-  color: var(--hotpink);
+.modal button.aux {
+  color: var(--neutralgrey);
   background: transparent;
-  border: 0;
+  border: 1px solid var(--neutralgrey);
   text-transform: capitalize;
   font-family: var(--font);
   font-size: 1rem;
-  margin: 0;
+  line-height: 1.5rem;
 }
 
 
@@ -350,7 +401,7 @@ button:focus {
 
 .menu-general li{
   margin-bottom: 1rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .menu-general .menu-niveles {
