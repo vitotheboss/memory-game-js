@@ -18,11 +18,20 @@ async function cargarJuego() {
         document.querySelector('body').addEventListener('click',menuNivelFueraClick);
         document.addEventListener('keydown',menuNivelEscape);
         agregarClaseCss('#bienvenida','visible');
-        document.querySelector('#goPremio').addEventListener('click',goPremio);
-        document.querySelector('#salir-juego').addEventListener('click',juegoSalir);
+        // document.querySelector('#goPremio').addEventListener('click',goPremio);
+        document.querySelectorAll('.goPremio').forEach(
+            (e)=> e.addEventListener('click',()=> goPremio())
+        );
+        // document.querySelector('#salir-juego').addEventListener('click',juegoSalir);
+        document.querySelectorAll('.salir-juego').forEach(
+            (e)=> e.addEventListener('click',()=> goSalir())
+        );
+        document.querySelector('.quit').addEventListener('click',()=>{juegoSalir();});
         document.querySelector('#sonido-interruptor').innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
+        document.querySelector('#guardarPartida').addEventListener('click',()=>{guardarPuntuacion(); juegoSalir();});
         sonidoInterruptor();
         grupoCartas = datoCartas.cartas;
+        MemoryPartidasDB.iniciar();
         cargaNivel();
     }
 }

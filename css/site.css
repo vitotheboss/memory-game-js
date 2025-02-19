@@ -2,10 +2,14 @@
   --bg: #fafafa;
   --font: "Archivo", sans-serif;
   --font-display: "Archivo Narrow", sans-serif;
+  --font-arcade: 'Press Start 2P',sans-serif;
   --hotpink: #e94057;
   --orange: #f27121;
-  --lightgrey: #f6f6fe;
+
+  --lightestgrey: #f6f6fe;
+  --lightgrey: #e7e7f0;
   --neutralgrey: #bcbcc0;
+  --mediumgrey: #8d8d90;
   --gradient: linear-gradient(35deg, var(--orange), var(--hotpink));
   --menu-width: 36px;
 }

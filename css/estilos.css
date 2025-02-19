@@ -193,6 +193,7 @@ main {
 .sube-nivel,
 .game-over,
 .end-game,
+.quit-game,
 .final-score {
   display: none;
   position: absolute;
@@ -206,6 +207,7 @@ main {
 .sube-nivel.visible,
 .game-over.visible,
 .end-game.visible,
+.quit-game.visible,
 .final-score.visible 
 {
   display: flex;
@@ -310,15 +312,16 @@ button:hover,
 button:focus {
   opacity: 1;
   outline: 0;
+  transform: scale(1.05);
 }
 
 .modal button.aux {
-  color: var(--neutralgrey);
-  background: transparent;
-  border: 1px solid var(--neutralgrey);
-  text-transform: capitalize;
-  font-family: var(--font);
-  font-size: 1rem;
+  color: var(--mediumgrey);
+  background: var(--lightgrey);
+  border: 1px solid var(--lightgrey);
+  /* text-transform: capitalize; */
+  /* font-family: var(--font); */
+  /* font-size: 1rem; */
   line-height: 1.5rem;
 }
 
@@ -425,6 +428,74 @@ button:focus {
 .oculto {
   visibility: hidden;
   display: none;
+}
+
+
+/* - - - FORM - - -  */
+
+form label {
+
+}
+
+input[type="text"] {
+  font-size: 2rem;
+  padding: 14px 16px 8px 16px;
+  border: 2px solid var(--neutralgrey);
+  border-radius: 18px;
+  line-height: 2rem;
+  font-family: var(--font-arcade);
+  width: 428px;
+  outline: none;
+  margin: 0 0 2rem 0;
+  color: var(--orange);
+  text-shadow: 3px 3px 1px var(--lightgrey), 2px 0px 1px var(--lightgrey);
+}
+
+input[type="text"]:focus,
+input[type="text"]:focus-visible
+{
+  box-shadow: 0 0 12px var(--hotpink);
+  border-color: transparent;
+  
+}
+
+input[type="text"]::placeholder,
+input[type="text"]::-moz-placeholder,
+input[type="text"]::-webkit-input-placeholder {
+  font-size: 1rem;
+  line-height: 2rem;
+  color: var(--neutralgrey);
+  font-family: var(--font);
+}
+
+label span {
+  color: var(--hotpink);
+  font-size: 1.5rem;
+  margin-bottom: 2%;
+}
+
+
+.input-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: start;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.pt-0 {
+  padding-top: 0 !important;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
+
+.mb-0 {
+  margin-bottom: 0 !important;
 }
 
 .mt-md {

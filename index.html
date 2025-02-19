@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <title>Domestika - Juego Memory - Ejercicio Curso</title>
   <link href="https://fonts.googleapis.com/css?family=Archivo|Archivo+Narrow:600" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link href="css/site.css" rel="stylesheet" />
   <link href="css/estilos.css" rel="stylesheet" />
 </head>
@@ -70,7 +71,8 @@
         <h2>¡Oh no!</h2>
         <p><span class="emoji-accent">😭</span><br>Te has quedado<br>sin movimientos</p>
         <div class="botones">
-          <button class="reiniciar">Reiniciar</button>
+          <button class="reiniciar">Reiniciar Nivel</button>
+          <button class="salir-juego aux">Salir</button>
         </div>   
       </div>
     </div>
@@ -79,7 +81,8 @@
         <h2>¡Oh no!</h2>
         <p><span class="emoji-accent">😭</span><br>Te has quedado<br>sin tiempo</p>
         <div class="botones">
-          <button class="reiniciar">Reiniciar</button>
+          <button class="reiniciar">Reiniciar Nivel</button>
+          <button class="salir-juego aux">Salir</button>
         </div>        
       </div>
     </div>
@@ -91,8 +94,21 @@
         <div class="puntuacion nivel" style="font-size: 0.66em;"></div>
         <hr>
         <div class="botones">
-          <button id="goPremio">Siguiente</button>
-          <button class="reiniciar aux">Reiniciar</button>
+          <button id="goPremio" class="goPremio">Siguiente</button>
+          <button class="reiniciar aux">Reiniciar Nivel</button>
+        </div> 
+      </div>
+    </div>
+    <div id="quitGame" class="quit-game">
+      <div class="modal">
+        <h2>¡Otra vez será!</h2>
+        <p><span class="emoji-accent">🕹️</span><br>Has conseguido<br>todos estos puntos</p>
+        <div class="puntuacion final"></div>
+        <p style="font-size: 0.66em;" class="mb-0">Guardar la puntuación<br>conseguida hasta este nivel<br>o salir sin guardar</p>
+        <hr>
+        <div class="botones">
+          <button id="goPremio2" class="goPremio">Guardar Puntuación</button>
+          <button class="quit aux">No puntuar</button>
         </div> 
       </div>
     </div>
@@ -101,8 +117,12 @@
         <h2>¡Enhorabuena!</h2>
         <p>Aquí tienes tu premio<br><span class="emoji-accent">🏆</span></p>
         <div class="puntuacion final"></div>
-        <hr>
-        <div class="botones">
+        <p class="mt-md">Escribe tu nombre<br>y guarda la puntuación conseguida</p>
+        <div class="botones pt-0">
+          <form action="" id="clasificacion">
+            <label for="nombre" class="input-col"><span></span><input type="text" id="nombre" name="nombre" maxlength="12" class="text-center"></label>
+          </form>          
+          <button id="guardarPartida">Guardar y Salir</button>
         </div> 
       </div>
     </div>
@@ -124,7 +144,7 @@
       </div>
     </div>
     <div>
-      <button id="salir-juego">💣 Salir</button>
+      <button id="salir-juego" class="salir-juego">💣 Salir</button>
     </div>  
     
   </div>
@@ -143,6 +163,7 @@
   <script src="js/nivel-juego.js"></script>
   <script src="js/iniciar-juego.js"></script>
   <script src="js/iniciar-carga.js"></script>
+  <script src="js/iniciar-datos.js"></script>
 </body>
 
 </html>

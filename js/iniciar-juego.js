@@ -7,6 +7,7 @@ function iniciar() {
     document.querySelector('#mov').innerText = `0${movimientos}`;
     quitarClaseCss('#endGame','visible');
     quitarClaseCss('#gameOver','visible');
+    quitarClaseCss('#quitGame','visible');
     quitarClaseCss('#subeNivel','visible');
     quitarClaseCss('#timeOver', 'visible');
     quitarClaseCss('#bienvenida', 'visible');
@@ -59,6 +60,7 @@ function finalizar() {
         puntos.abrir();
         puntos.acumulaSuma();
         puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
+        puntos.escribe('#quitGame .puntuacion',puntos.acumulado);
         return;
     };
 
@@ -69,6 +71,7 @@ function finalizar() {
         puntos.abrir();
         puntos.acumulaSuma();
         puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
+        puntos.escribe('#quitGame .puntuacion',puntos.acumulado);
         puntos.escribe('#finalScore .puntuacion.final',puntos.acumulado);
         return;
     };
@@ -91,15 +94,34 @@ function goPremio() {
     agregarClaseCss('#finalScore','visible');
 }
 
-function juegoSalir() {
-    cronometro.parar();
+function goSalir() {
+    if (cronometro.iniciaCrono) {
+        console.log('iniciaCrono',cronometro.iniciaCrono);
+        cronometro.parar();
+    }
     menuNivelOculto();
+    if (nivelActual===0 && puntos.acumulado===0) {
+        juegoSalir();
+        return
+    }
+    agregarClaseCss('#quitGame','visible');
+}
+
+function juegoSalir() {
+  
+    
     setTimeout(() => {
+        nivelActual = 0;
+        refrescaNivel();
         agregarClaseCss('#bienvenida','visible');
+        quitarClaseCss('#finalScore', 'visible');
+        quitarClaseCss('#quitGame', 'visible');
         puntos.borrarnivel('#subeNivel .puntuacion');
         puntos.borrarnivel('#endGame .puntuacion');
         puntos.borraracumulado('#menu-puntuacion .puntuacion');
-    },800);
+        // 
+        document.querySelector('form#clasificacion').reset() 
+    },600);
 }
 
 // - - SONIDOS - - //
