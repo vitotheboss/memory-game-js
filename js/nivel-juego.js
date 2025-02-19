@@ -63,6 +63,10 @@ function menuNivelEscape(e) {
 
 // - - - Ejecuta Nivel - - - //
 
+function bajaNivel() {
+    nivelActual--;
+}
+
 function subeNivel() {
     nivelActual++;
 }

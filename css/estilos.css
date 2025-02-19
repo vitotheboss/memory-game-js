@@ -41,6 +41,17 @@ body {
   min-width: 20rem;
 }
 
+.bienvenida .ranking {
+  width: 956px;
+  font-family: var(--font-arcade);
+  font-size: 1em;
+  text-shadow: 3px 3px 1px var(--lightgrey), 2px 0px 1px var(--lightgrey);
+}
+
+.bienvenida .ranking .theader {
+  margin-bottom: 20px;
+}
+
 .cabecera {
   padding: 0.5rem 2rem;
   background: white;
@@ -433,9 +444,7 @@ button:focus {
 
 /* - - - FORM - - -  */
 
-form label {
 
-}
 
 input[type="text"] {
   font-size: 2rem;
@@ -500,4 +509,66 @@ label span {
 
 .mt-md {
   margin-top: 2rem;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.table .theader,
+.table .tbody {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.table .theader {
+  font-size: 0.6em;
+}
+
+.table .theader > div,
+.table .tbody > div {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.table .theader .col,
+.table .tbody .col {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0%;
+  padding: 0.4rem 0;
+}
+
+.col.nombre {
+  text-align: left;
+  color: var(--orange);
+}
+
+.col.puntos {
+  text-align: right;
+  color: var(--hotpink);
+}
+
+.col.nivel {
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: 120px !important;
+  color: var(--mediumgrey);
+}
+
+.col.posicion {
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: 120px !important;
+  text-align: left;
+}
+
+.col.posicion span {
+  font-size: 0.8em;
+  font-style: oblique;
+  margin-right: 5px;
 }

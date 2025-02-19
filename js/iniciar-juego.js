@@ -104,11 +104,12 @@ function goSalir() {
         juegoSalir();
         return
     }
+    bajaNivel();
     agregarClaseCss('#quitGame','visible');
 }
 
-function juegoSalir() {
-  
+async function juegoSalir() {
+    await escribirRanking();
     
     setTimeout(() => {
         nivelActual = 0;
