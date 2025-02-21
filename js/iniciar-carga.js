@@ -31,7 +31,7 @@ async function cargarJuego() {
         document.querySelector('#guardarPartida').addEventListener('click',()=>{guardarPuntuacion(); juegoSalir();});
         sonidoInterruptor();
         grupoCartas = datoCartas.cartas;
-        await MemoryPartidasDB.iniciar();
+        await PartidasDB.iniciar();
         cargaNivel();
         await escribirRanking();
     }

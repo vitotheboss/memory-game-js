@@ -1,107 +1,133 @@
-const MemoryPartidasDB = {
-    dbName: "JuegoVTBMemoryDB",
-    storeName: "partidas",
+const PartidasDB = {
+    dbName: 'JuegoVTBMemoryDB',
+    storeName: 'partidas',
     dbVersion: 1,
     db: null,
 
-    // 📌 1. Inicializar IndexedDB
+    // - - Iniciar IndexedDB - - //
     async iniciar() {
         try {
-            let request = indexedDB.open(this.dbName, this.dbVersion);
+            let peticion = indexedDB.open(this.dbName, this.dbVersion);
 
-            request.onupgradeneeded = (event) => {
-                this.db = event.target.result;
+            peticion.onupgradeneeded = (e) => {
+                this.db = e.target.result;
 
                 if (this.db.objectStoreNames.contains(this.storeName)) {
                     this.db.deleteObjectStore(this.storeName);
                 }
 
-                let store = this.db.createObjectStore(this.storeName, { keyPath: "id", autoIncrement: true });
+                let store = this.db.createObjectStore(this.storeName, { keyPath: 'id', autoIncrement: true });
 
-                store.createIndex("nombre", "nombre", { unique: false });
-                store.createIndex("fecha", "fecha", { unique: false });
-                store.createIndex("pausada", "pausada", { unique: false });
+                store.createIndex('nombre', 'nombre', { unique: false });
+                store.createIndex('fecha', 'fecha', { unique: false });
+                store.createIndex('pausada', 'pausada', { unique: false });
 
-                console.log("IndexedDB actualizada y lista.");
+                console.log('✅ IndexedDB actualizada y lista.');
             };
 
             return new Promise((resolve, reject) => {
-                request.onsuccess = (event) => {
-                    this.db = event.target.result;
-                    console.log("IndexedDB lista para usar.");
+                peticion.onsuccess = (e) => {
+                    this.db = e.target.result;
+                    console.log('✅ IndexedDB lista para usar.');
                     resolve(this.db);
                 };
-                request.onerror = (event) => {
-                    console.error("Error al abrir IndexedDB", event);
-                    reject(event);
+                peticion.onerror = (e) => {
+                    console.error('❌ Error al abrir IndexedDB', e);
+                    reject(e);
                 };
             });
         } catch (error) {
-            console.error("Error en la inicialización de IndexedDB", error);
+            console.error('❌ Error en la inicialización de IndexedDB', error);
         }
     },
 
-    // 📌 2. Guardar una Nueva Partida
+    // - - Guardar una Nueva Partida - - //
     async guardarPartida(nombre, nivelMax, puntuacion, pausada = false) {
         try {
-            let transaccion = this.db.transaction(this.storeName, "readwrite");
+            let transaccion = this.db.transaction(this.storeName, 'readwrite');
             let store = transaccion.objectStore(this.storeName);
             let nuevaPartida = { nombre, nivelMax, puntuacion, pausada, fecha: new Date().toISOString() };
 
-            let request = store.add(nuevaPartida);
+            let peticion = store.add(nuevaPartida);
             return new Promise((resolve, reject) => {
-                request.onsuccess = () => {
-                    console.log("Partida guardada:", nuevaPartida);
+                peticion.onsuccess = () => {
+                    console.log('Partida guardada:', nuevaPartida);
                     resolve(nuevaPartida);
                 };
-                request.onerror = (event) => reject(event);
+                peticion.onerror = (e) => reject(e);
             });
         } catch (error) {
-            console.error("Error al guardar la partida", error);
+            console.error('❌ Error al guardar la partida', error);
         }
     },
 
-    // 📌 3. Obtener Todas las Partidas
+    // - - Obtener Todas las Partidas - - //
     async obtenerPartidas() {
         try {
-            let transaccion = this.db.transaction(this.storeName, "readonly");
+            let transaccion = this.db.transaction(this.storeName, 'readonly');
             let store = transaccion.objectStore(this.storeName);
-            let request = store.getAll();
+            let peticion = store.getAll();
 
             return new Promise((resolve, reject) => {
-                request.onsuccess = () => {
-                    //console.log("Partidas guardadas:", request.result);
-                    resolve(request.result);
+                peticion.onsuccess = () => {
+                    //console.log('Partidas guardadas:', peticion.result);
+                    resolve(peticion.result);
                 };
-                request.onerror = (event) => reject(event);
+                peticion.onerror = (e) => reject(e);
             });
         } catch (error) {
-            console.error("Error al obtener partidas", error);
+            console.error('❌ Error al obtener partidas', error);
         }
     },
 
-    // 📌 4. Buscar Partidas Pausadas por Usuario
+    // - - Obtener Última Partida - - //
+    async obtenerUltimaPartida() {
+        try {
+            let transaccion = this.db.transaction(this.storeName, 'readonly');
+            let store = transaccion.objectStore(this.storeName);
+            let peticion = store.openCursor(null, "prev");
+
+            return new Promise((resolve, reject) => {
+                peticion.onsuccess = (e) => {
+                    let cursor = e.target.result;
+                    if (cursor) {
+                        resolve(cursor.value);
+                    } else {
+                        resolve (null);
+                    }
+                };
+                peticion.onerror = (e) => reject(e);
+            });
+
+        } catch (error) {
+            console.error('❌ Error al obtener partidas', error);
+        }
+    },
+
+    // Buscar Partidas Pausadas por Usuario
+    /*
     async obtenerPartidaPausada(nombre) {
         try {
-            let transaccion = this.db.transaction(this.storeName, "readonly");
+            let transaccion = this.db.transaction(this.storeName, 'readonly');
             let store = transaccion.objectStore(this.storeName);
-            let index = store.index("nombre");
-            let request = index.getAll(nombre);
+            let index = store.index('nombre');
+            let peticion = index.getAll(nombre);
 
             return new Promise((resolve, reject) => {
-                request.onsuccess = () => {
-                    let partidas = request.result.filter(p => p.pausada);
+                peticion.onsuccess = () => {
+                    let partidas = peticion.result.filter(p => p.pausada);
                     resolve(partidas.length > 0 ? partidas[0] : null);
-                    console.log("Partida Pausadas:", partidas);
+                    console.log('Partida Pausadas:', partidas);
                 };
-                request.onerror = (event) => reject(event);
+                peticion.onerror = (e) => reject(e);
             });
         } catch (error) {
-            console.error("Error al obtener partida pausada", error);
+            console.error('❌ Error al obtener partida pausada', error);
         }
     },
-
-    // 📌 5. Pausar una Partida (Solo puede haber una por usuario)
+    */
+    // - - Pausar una Partida (Solo puede haber una por usuario) - - //
+    /*
     async pausarPartida(id, nombre) {
         try {
             let partidaPausada = await this.obtenerPartidaPausada(nombre);
@@ -111,27 +137,30 @@ const MemoryPartidasDB = {
 
             return await this.actualizarPartida(id, undefined, undefined, true);
         } catch (error) {
-            console.error("Error al pausar la partida", error);
+            console.error('❌ Error al pausar la partida', error);
         }
     },
-
-    // 📌 6. Reanudar una Partida (Despausarla)
+    */
+    // - - Reanudar una Partida (Despausarla) - - //
+    /*
     async reanudarPartida(id) {
         return await this.actualizarPartida(id, undefined, undefined, false);
     },
+    */
 
-    // 📌 7. Actualizar una Partida
+    // Actualizar una Partida
+    /*
     async actualizarPartida(id, nuevoNivel, nuevaPuntuacion, pausada) {
         try {
-            let transaccion = this.db.transaction(this.storeName, "readwrite");
+            let transaccion = this.db.transaction(this.storeName, 'readwrite');
             let store = transaccion.objectStore(this.storeName);
-            let request = store.get(id);
+            let peticion = store.get(id);
 
             return new Promise((resolve, reject) => {
-                request.onsuccess = () => {
-                    let partida = request.result;
+                peticion.onsuccess = () => {
+                    let partida = peticion.result;
                     if (!partida) {
-                        reject("Partida no encontrada.");
+                        reject('Partida no encontrada.');
                         return;
                     }
 
@@ -142,30 +171,31 @@ const MemoryPartidasDB = {
 
                     let updateRequest = store.put(partida);
                     updateRequest.onsuccess = () => {
-                        console.log("Partida actualizada:", partida);
+                        console.log('Partida actualizada:', partida);
                         resolve(partida);
                     };
                 };
-                request.onerror = (event) => reject(event);
+                peticion.onerror = (e) => reject(e);
             });
         } catch (error) {
-            console.error("Error al actualizar la partida", error);
+            console.error('Error al actualizar la partida', error);
         }
     },
+    */
 
-    // 📌 8. Eliminar TODA la Base de Datos
+    // - -  Eliminar TODA la Base de Datos - - //
     async eliminarBaseDeDatos() {
         return new Promise((resolve, reject) => {
-            let request = indexedDB.deleteDatabase(this.dbName);
+            let peticion = indexedDB.deleteDatabase(this.dbName);
 
-            request.onsuccess = () => {
+            peticion.onsuccess = () => {
                 console.log(`Base de datos ${this.dbName} eliminada correctamente.`);
                 resolve();
             };
 
-            request.onerror = (event) => {
-                console.error("Error al eliminar la base de datos", event);
-                reject(event);
+            peticion.onerror = (e) => {
+                console.error('❌ Error al eliminar la base de datos', e);
+                reject(e);
             };
         });
     }
@@ -174,5 +204,5 @@ const MemoryPartidasDB = {
 
 function guardarPuntuacion() {
     let nombreJugador = document.querySelector('input#nombre').value
-    MemoryPartidasDB.guardarPartida(nombreJugador,nivelActual,puntos.acumulado,false);
+    PartidasDB.guardarPartida(nombreJugador,nivelActual,puntos.acumulado,false);
 }
