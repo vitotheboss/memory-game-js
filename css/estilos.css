@@ -52,6 +52,47 @@ body {
   margin-bottom: 20px;
 }
 
+.bienvenida .ranking .tbody > div.ultimo {
+  position: relative;
+}
+
+.bienvenida .ranking.ultimojuego .table .tbody > div {
+  margin-top: 25px;
+  padding-top: 25px;
+  border-top: dashed 3px blue;
+  position: relative;
+}
+
+.bienvenida .ranking .tbody > div.ultimo::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -14px;
+  bottom: -4px;
+  right: -14px;
+  display: block;
+  box-shadow: 0 0 20px 1px var(--lightgrey);
+  border-radius: 14px;
+  border: dashed 3px blue;
+}
+
+.bienvenida .ranking .tbody > div.ultimo::after,
+.bienvenida .ranking.ultimojuego .table .tbody > div::after {
+  content: 'ULTIMO JUEGO';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  font-size: 0.465em;
+  transform: rotate(-0deg) translate(-50%,-50%);
+  color: blue;
+  letter-spacing: -0.005em;
+  background-color: white;
+  padding: 3px 6px;
+  line-height: 0.7;
+}
+
+
+
 .cabecera {
   padding: 0.5rem 2rem;
   background: white;
@@ -546,6 +587,9 @@ label span {
 .col.nombre {
   text-align: left;
   color: var(--orange);
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: 46% !important;
 }
 
 .col.puntos {

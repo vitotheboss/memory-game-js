@@ -10,7 +10,7 @@ const movimientoMax = ()=> {return nivel[nivelActual].maxmovimientos};
 
 // - -  - Estado Juego - - - //
 let nivelActual = 0;
-let puntuacion = 0;
+//let puntuacion = 0;
 //let puntuacionAlmacena = false;
 let modoRelax = false;
 let sonidoActivado = false;
