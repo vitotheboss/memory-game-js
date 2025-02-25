@@ -35,13 +35,13 @@ async function escribirRanking() {
     let top5 = ranking.partidas.slice(0,5);
     top5.forEach((n,i)=> {
         let lineaRanking = document.createElement('div');
-        lineaRanking.innerHTML = `<div class="col posicion"><span>#</span>${i+1}</div><div class="col nombre">${n.nombre}</div><div class="col nivel">${n.nivelMax}</div><div class="col puntos">${n.puntuacion}</div>`;
+        lineaRanking.innerHTML = `<div class="col posicion"><span>#</span>${i+1}</div><div class="col nombre">${n.nombre}</div><div class="col nivel">${n.nivelMax+1}</div><div class="col puntos">${n.puntuacion}</div>`;
         if (n.id === ranking.ultimapartida.id) { lineaRanking.classList.add('ultimo'); ultimoenRanking=true;};
         gridRanking.appendChild(lineaRanking);        
     } );
     if (!ultimoenRanking) { 
         console.log('ultimo en ranking:',ultimoenRanking);
         let posicionUltimoenRanking = ranking.partidas.findIndex(pos => pos.id === ranking.ultimapartida.id)
-        gridUltimo.innerHTML = `<div><div class="col posicion"><span>#</span>${posicionUltimoenRanking+1}</div><div class="col nombre">${ranking.ultimapartida.nombre}</div><div class="col nivel">${ranking.ultimapartida.nivelMax}</div><div class="col puntos">${ranking.ultimapartida.puntuacion}</div></div>`;
+        gridUltimo.innerHTML = `<div><div class="col posicion"><span>#</span>${posicionUltimoenRanking+1}</div><div class="col nombre">${ranking.ultimapartida.nombre}</div><div class="col nivel">${ranking.ultimapartida.nivelMax+1}</div><div class="col puntos">${ranking.ultimapartida.puntuacion}</div></div>`;
     }
 }

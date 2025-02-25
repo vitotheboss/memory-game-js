@@ -64,11 +64,12 @@ function menuNivelEscape(e) {
 // - - - Ejecuta Nivel - - - //
 
 function bajaNivel() {
-    nivelActual--;
+    nivelActual === 0 ? nivelActual : nivelActual--;
+    console.log(nivelActual);
 }
 
 function subeNivel() {
-    nivelActual++;
+    nivelActual >= grupoCartas.length - 1 ? nivelActual = 0 : nivelActual++;
 }
 
 function refrescaNivel() {

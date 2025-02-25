@@ -1,6 +1,7 @@
 // - - - Inicios y Tipos de Juego - - - //
 
 function iniciar() {
+    estaJugando = true;
     movimientos = 0;
     document.querySelector('#mov-total').innerText = movimientoMax() < 10 ? `0${movimientoMax()}` : `${movimientoMax()}`;
     reparteCartas(todasCartas(nivelActual));
@@ -12,6 +13,7 @@ function iniciar() {
     quitarClaseCss('#timeOver', 'visible');
     quitarClaseCss('#bienvenida', 'visible');
     quitarClaseCss('#finalScore', 'visible');
+    puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
     if (!modoRelax) {
         agregarClaseCss('#menu-niveles', 'oculto');
         let minutos = Math.floor(nivel[nivelActual].tiempo / 60);
@@ -29,6 +31,7 @@ function iniciar() {
 
 function iniciarRelax() {
     modoRelax = true;
+    paloRelax = grupoCartas.flat()[Math.floor(Math.random()*grupoCartas.length)];
     agregarClaseCss('#mov-separa','oculto');
     agregarClaseCss('#mov-total','oculto');
     iniciar();
@@ -50,24 +53,31 @@ function reiniciar() {
 }
 
 function finalizar() {
+    estaJugando = false;
     // console.log('Finalizar');
     cronometro.parar();
 
     if (nivelActual < grupoCartas.length - 1) {
-        agregarClaseCss('#subeNivel','visible');
         puntos.puntuar();
+        agregarClaseCss('#subeNivel','visible');        
         puntos.escribe('#subeNivel .puntuacion',puntos.nivel);
         puntos.abrir();
         puntos.acumulaSuma();
         puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
         puntos.escribe('#quitGame .puntuacion',puntos.acumulado);
+        puntos.escribe('#finalScore .puntuacion.final',puntos.acumulado);
         return;
     };
 
     if (nivelActual >= grupoCartas.length - 1) {
-        agregarClaseCss('#endGame','visible');
         puntos.puntuar();
-        puntos.escribe('#endGame .puntuacion.nivel',puntos.nivel);
+        if (modoRelax) {
+            agregarClaseCss('#subeNivel','visible');
+            puntos.escribe('#subeNivel .puntuacion',puntos.nivel);
+        } else {
+            agregarClaseCss('#endGame','visible');
+            puntos.escribe('#endGame .puntuacion.nivel',puntos.nivel);
+        } 
         puntos.abrir();
         puntos.acumulaSuma();
         puntos.escribe('#menu-puntuacion .puntuacion',puntos.acumulado);
@@ -100,11 +110,13 @@ function goSalir() {
         cronometro.parar();
     }
     menuNivelOculto();
+    if (modoRelax) {juegoSalir(); return;}
     if (nivelActual===0 && puntos.acumulado===0) {
         juegoSalir();
         return
     }
-    bajaNivel();
+    if (estaJugando) {bajaNivel();}
+    
     agregarClaseCss('#quitGame','visible');
 }
 
