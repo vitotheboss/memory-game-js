@@ -16,7 +16,7 @@ async function cargarJuego() {
         document.querySelector('#control-nivel').addEventListener('click',menuNivelVisible);
         document.querySelector('#cierra-niveles').addEventListener('click',menuNivelOculto);
         document.querySelector('body').addEventListener('click',menuNivelFueraClick);
-        document.addEventListener('keydown',menuNivelEscape);
+        // document.addEventListener('keydown',menuNivelEscape);
         agregarClaseCss('#bienvenida','visible');
         // document.querySelector('#goPremio').addEventListener('click',goPremio);
         document.querySelectorAll('.goPremio').forEach(
@@ -28,7 +28,7 @@ async function cargarJuego() {
         );
         document.querySelector('.quit').addEventListener('click',()=>{juegoSalir();});
         document.querySelector('#sonido-interruptor').innerHTML = sonidoActivado ? `Desactivar<span> 🔇</span>` : `Activar <span>🔊</span>`;
-        document.querySelector('#guardarPartida').addEventListener('click',()=>{guardarPuntuacion(); juegoSalir();});
+        document.querySelector('#guardarPartida').addEventListener('click',()=>{guardarPuntuacion(clasificacion);});
         sonidoInterruptor();
         grupoCartas = datoCartas.cartas;
         await PartidasDB.iniciar();

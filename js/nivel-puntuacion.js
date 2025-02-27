@@ -63,3 +63,36 @@ const puntos = {
         this.escribe(nodo,this.acumulado);
     }
 }
+
+// - - - FORMULARIOS
+
+const formularioAccion = {
+    clasificacion: (f) => {
+        guardarPuntuacion(f);
+        console.log('formulario:', f)
+    }
+} 
+
+function guardarPuntuacion(f) {
+    let nombreJugador = f.querySelector('input#nombre')
+    if (!nombreJugador || nombreJugador.value.trim() === '') {
+        console.log('formulario vacío. Meta el nombre.');
+        return;
+    }
+    PartidasDB.guardarPartida(nombreJugador.value,nivelActual,puntos.acumulado,false);
+    juegoSalir();
+    console.log(nombreJugador);
+}
+
+function ejecutaFormEnter(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        let f = e.target.closest('form');
+        if(f) {
+            let iD = f.id;
+            if (formularioAccion[iD]) formularioAccion[iD](f);
+        }
+    }
+}
+
+document.addEventListener('keydown',ejecutaFormEnter);

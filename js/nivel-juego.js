@@ -43,10 +43,12 @@ function cambiaNivel() {
 function menuNivelVisible(e) {
     e.stopPropagation();
     intercambiaClaseCss('.menu-general','visible');
+    document.addEventListener('keydown',menuNivelEscape);
 }
 
 function menuNivelOculto() {
     quitarClaseCss('.menu-general','visible');
+    document.removeEventListener('keydown',menuNivelEscape);
 }
 
 function menuNivelFueraClick(e) {

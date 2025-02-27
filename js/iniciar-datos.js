@@ -200,9 +200,3 @@ const PartidasDB = {
         });
     }
 };
-
-
-function guardarPuntuacion() {
-    let nombreJugador = document.querySelector('input#nombre').value
-    PartidasDB.guardarPartida(nombreJugador,nivelActual,puntos.acumulado,false);
-}
